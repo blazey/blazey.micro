@@ -1,14 +1,38 @@
 using System;
 
-namespace Blazey.Micro
+namespace Blazey.Micro.Tests
 {
-	public class FirstName
+	internal class FirstName
 	{
-		public FirstName(string firstName)
+	    private readonly string _firstName;
+	    private readonly bool _greediestCtorWasCalled;
+
+	    internal FirstName()
+	    {
+	        _greediestCtorWasCalled = false;
+	    }
+
+		internal FirstName(string firstName)
 		{
-			if (firstName == null)
-				throw new ArgumentNullException ("firstName");
+		    _firstName = firstName;
+		    if (firstName == null)
+		    {
+		        throw new ArgumentNullException("firstName");
+		    }
+
+		    _greediestCtorWasCalled = true;
+
 		}
+
+        internal bool GeediestCtorWasCalled()
+        {
+           return  _greediestCtorWasCalled;
+        }
+
+	    public override string ToString()
+	    {
+	        return _firstName;
+	    }
 	}
 }
 

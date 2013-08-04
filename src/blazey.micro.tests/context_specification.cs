@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Blazey.Micro.Tests
 {
     [TestFixture]
-    public abstract class context_spec{
+    public abstract class context_specification{
 
         [SetUp]
         public void SetUp(){
