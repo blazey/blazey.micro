@@ -1,6 +1,6 @@
 using System;
 
-namespace Blazey.Micro.Tests
+namespace Blazey.Micro.Tests.doubles
 {
 	internal class FirstName
 	{
