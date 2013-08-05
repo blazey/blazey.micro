@@ -6,25 +6,25 @@ namespace Blazey.Micro.Tests
 {
     public class when_first_name_is_created_from_anemic_type : context_specification
     {
-        private FirstName _firstName;
+        private Name _name;
         private ModelActivator _modelActivator;
         private AnemicType _anemicType;
 
         protected override void Arrange()
         {
             _modelActivator = new ModelActivator();
-            _anemicType = new AnemicType {FirstName = "Edward"};
+            _anemicType = new AnemicType {FirstName = "Edward", LastName = "Blackburn"};
         }
 
         protected override void Act()
         {
-            _firstName = _modelActivator.Activate<FirstName>(_anemicType);
+            _name = _modelActivator.Activate<Name>(_anemicType);
         }
 
         [Test]
-        public void should_create_first_name()
+        public void should_create_fulls_name()
         {
-            Assert.That(_firstName.ToString(), Is.EqualTo("Edward"));
+            Assert.That(_name.ToString(), Is.EqualTo("Edward Blackburn"));
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Blazey.Micro.Tests
         [Test]
         public void should_invoke_greediest_ctor()
         {
-            Assert.That(_firstName.GeediestCtorWasCalled(), Is.True);
+            Assert.That(_name.GeediestCtorWasCalled(), Is.True);
         }
     }
 }

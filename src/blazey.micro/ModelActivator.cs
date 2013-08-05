@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -9,6 +8,9 @@ namespace blazey.micro
     {
         public T Activate<T>(object source)
         {
+
+            if(null == source) throw new ArgumentNullException("source");
+
             var toActivateType = typeof (T);
             //order by scope, then length
             var constructor = toActivateType.GetConstructors(
@@ -27,10 +29,10 @@ namespace blazey.micro
             }
 
             var properties = (from sourceProperty in source.GetType().GetProperties()
-                             from ctorParam in constructor.GetParameters()
-                             where sourceProperty.Name.Equals(ctorParam.Name, StringComparison.CurrentCultureIgnoreCase) &&
-                                   sourceProperty.PropertyType == ctorParam.ParameterType
-                             select sourceProperty.GetValue(source, null)).Cast<object>().ToArray(); 
+                              from ctorParam in constructor.GetParameters()
+                              where sourceProperty.Name.Equals(ctorParam.Name, StringComparison.CurrentCultureIgnoreCase) &&
+                                    sourceProperty.PropertyType == ctorParam.ParameterType
+                              select sourceProperty.GetValue(source, null)).ToArray(); 
 
             var activated = constructor.Invoke(properties);
 

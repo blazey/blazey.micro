@@ -2,24 +2,25 @@ using System;
 
 namespace Blazey.Micro.Tests.doubles
 {
-	internal class FirstName
+	internal class Name
 	{
 	    private readonly string _firstName;
+        private readonly string _lastName;
 	    private readonly bool _greediestCtorWasCalled;
 
-	    internal FirstName()
+	    internal Name()
 	    {
 	        _greediestCtorWasCalled = false;
 	    }
 
-		internal FirstName(string firstName)
+		internal Name(string firstName, string lastName)
 		{
-		    _firstName = firstName;
-		    if (firstName == null)
-		    {
-		        throw new ArgumentNullException("firstName");
-		    }
 
+		    if (null == firstName) throw new ArgumentNullException("firstName");
+		    if(null == lastName) throw new ArgumentNullException("lastName");
+
+            _firstName = firstName;
+		    _lastName = lastName;
 		    _greediestCtorWasCalled = true;
 
 		}
@@ -31,7 +32,7 @@ namespace Blazey.Micro.Tests.doubles
 
 	    public override string ToString()
 	    {
-	        return _firstName;
+	        return string.Join(" ", _firstName, _lastName);
 	    }
 	}
 }
