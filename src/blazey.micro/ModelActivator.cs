@@ -8,8 +8,7 @@ namespace blazey.micro
     {
         public T Activate<T>(object source)
         {
-
-            if(null == source) throw new ArgumentNullException("source");
+            if (null == source) throw new ArgumentNullException("source");
 
             var toActivateType = typeof (T);
             //order by scope, then length
@@ -23,20 +22,32 @@ namespace blazey.micro
                 throw new InvalidOperationException("No accessible constructor");
             }
 
-            if (null == constructor.GetParameters().FirstOrDefault())
+            var ctorParameters = constructor.GetParameters();
+
+            if (null == ctorParameters.FirstOrDefault())
             {
                 throw new InvalidOperationException("No accessible constructor");
             }
 
-            var properties = (from sourceProperty in source.GetType().GetProperties()
-                              from ctorParam in constructor.GetParameters()
-                              where sourceProperty.Name.Equals(ctorParam.Name, StringComparison.CurrentCultureIgnoreCase) &&
-                                    sourceProperty.PropertyType == ctorParam.ParameterType
-                              select sourceProperty.GetValue(source, null)).ToArray(); 
+            var properties = source.GetType().GetProperties().Select(info => Parameter.FromPropertyInfo(info, source));
+            var parameters = constructor.GetParameters().Select(Parameter.FromParameterInfo);
 
-            var activated = constructor.Invoke(properties);
+            Func<Parameter, Parameter, bool> sameTypeIgnoreCase =
+                (ctor, prop) =>
+                ctor.Name.Equals(prop.Name, StringComparison.CurrentCultureIgnoreCase) &&
+                ctor.Type == prop.Type;
+
+            var matches = from prop in properties
+                          from param in parameters
+                          where sameTypeIgnoreCase(prop, param)
+                          select prop;
+
+            var values = matches.Select(par => par.Value).ToArray();
+            var activated = constructor.Invoke(values);
 
             return (T) activated;
         }
+
+
     }
 }

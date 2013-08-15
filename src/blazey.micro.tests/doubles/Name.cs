@@ -6,6 +6,7 @@ namespace Blazey.Micro.Tests.doubles
 	{
 	    private readonly string _firstName;
         private readonly string _lastName;
+	    private readonly int _age;
 	    private readonly bool _greediestCtorWasCalled;
 
 	    internal Name()
@@ -13,14 +14,17 @@ namespace Blazey.Micro.Tests.doubles
 	        _greediestCtorWasCalled = false;
 	    }
 
-		internal Name(string firstName, string lastName)
+		internal Name(string firstName, string lastName, int age)
 		{
 
 		    if (null == firstName) throw new ArgumentNullException("firstName");
 		    if(null == lastName) throw new ArgumentNullException("lastName");
+            if (0 >= age) throw new ArgumentNullException("age");
+
 
             _firstName = firstName;
 		    _lastName = lastName;
+		    _age = age;
 		    _greediestCtorWasCalled = true;
 
 		}
@@ -32,7 +36,7 @@ namespace Blazey.Micro.Tests.doubles
 
 	    public override string ToString()
 	    {
-	        return string.Join(" ", _firstName, _lastName);
+	        return string.Join(" ", _firstName, _lastName, _age);
 	    }
 	}
 }

@@ -4,7 +4,7 @@ using blazey.micro;
 
 namespace Blazey.Micro.Tests
 {
-    public class when_first_name_is_created_from_anemic_type : context_specification
+    public class when_name_is_created_from_complex_anemic_type : context_specification
     {
         private Name _name;
         private ModelActivator _modelActivator;
@@ -13,7 +13,7 @@ namespace Blazey.Micro.Tests
         protected override void Arrange()
         {
             _modelActivator = new ModelActivator();
-            _anemicType = new AnemicType {FirstName = "Edward", LastName = "Blackburn"};
+            _anemicType = new AnemicType { FirstName = "Edward", LastName = "Blackburn", Age = 33 };
         }
 
         protected override void Act()
@@ -24,7 +24,7 @@ namespace Blazey.Micro.Tests
         [Test]
         public void should_create_fulls_name()
         {
-            Assert.That(_name.ToString(), Is.EqualTo("Edward Blackburn"));
+            Assert.That(_name.ToString(), Is.EqualTo("Edward Blackburn 33"));
         }
 
         [Test]

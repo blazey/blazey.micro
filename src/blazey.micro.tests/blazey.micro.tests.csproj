@@ -37,10 +37,13 @@
   <ItemGroup>
     <Compile Include="doubles\AnemicType.cs" />
     <Compile Include="context_specification.cs" />
-    <Compile Include="when_first_name_is_created_from_anemic_type.cs" />
-    <Compile Include="when_first_name_type_instantiated.cs" />
+    <Compile Include="doubles\Employee.cs" />
+    <Compile Include="doubles\NationalInsuranceNumber.cs" />
+    <Compile Include="when_name_is_created_from_complex_anemic_type.cs" />
+    <Compile Include="when_name_type_isnstantiated.cs" />
     <Compile Include="doubles\Name.cs" />
     <Compile Include="when_model_has_no_ctor.cs" />
+    <Compile Include="when_name_is_created_from_anemic_type.cs" />
     <Compile Include="when_source_is_null.cs" />
   </ItemGroup>
   <ItemGroup>
