@@ -13,6 +13,7 @@ namespace blazey.micro
             var toActivateType = typeof (T);
             //order by scope, then length
             var constructor = toActivateType.GetConstructors(
+                BindingFlags.Public |
                 BindingFlags.NonPublic |
                 BindingFlags.CreateInstance |
                 BindingFlags.Instance).OrderByDescending(ctor => ctor.GetParameters().Length).FirstOrDefault();

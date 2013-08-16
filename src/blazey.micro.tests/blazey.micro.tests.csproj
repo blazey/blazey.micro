@@ -39,6 +39,7 @@
     <Compile Include="context_specification.cs" />
     <Compile Include="doubles\Employee.cs" />
     <Compile Include="doubles\NationalInsuranceNumber.cs" />
+    <Compile Include="when_tree_is_created_from_complex_anemic_type.cs" />
     <Compile Include="when_name_is_created_from_complex_anemic_type.cs" />
     <Compile Include="when_name_type_isnstantiated.cs" />
     <Compile Include="doubles\Name.cs" />
